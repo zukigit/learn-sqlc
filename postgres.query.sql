@@ -27,3 +27,6 @@ WHERE id = $1;
 -- name: DeleteAuthorWithName :exec
 DELETE FROM authors
 WHERE name = $1;
+
+-- name: CountAuthors :one
+SELECT count(*) FROM authors;

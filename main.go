@@ -47,6 +47,12 @@ func run() error {
 		fmt.Println(author)
 	}
 
+	count, err := quries.CountAuthors(ctx)
+	if err != nil {
+		return err
+	}
+	fmt.Println("authors count", count)
+
 	return nil
 }
 
