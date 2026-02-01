@@ -21,7 +21,7 @@ func run() error {
 
 	quries := db.New(conn)
 
-	err = quries.DeleteAuthor(ctx, 1)
+	err = quries.DeleteAuthorWithName(ctx, "zuki")
 	if err != nil {
 		return err
 	}
