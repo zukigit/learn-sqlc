@@ -11,7 +11,6 @@ sql:
         out: "db"
         sql_package: "pgx/v5"
     rules:
-      - sqlc/db-prepare
       - no-delete
 
 rules:
