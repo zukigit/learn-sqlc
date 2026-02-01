@@ -3,8 +3,19 @@ sql:
   - engine: "postgresql"
     queries: "postgres.query.sql"
     schema: "postgres.schema.sql"
+    database:
+      uri: "postgres://postgres:${PG_PASSWORD}@rocky10:5432/test"
     gen:
       go:
         package: "db"
         out: "db"
         sql_package: "pgx/v5"
+    rules:
+      - sqlc/db-prepare
+      - no-delete
+
+rules:
+  - name: no-delete
+    message: "don't use delete statements"
+    rule: |
+      query.sql.contains("DELETE")
