@@ -21,12 +21,12 @@ func run() error {
 
 	quries := db.New(conn)
 
-	err = quries.DeleteAuthorWithName(ctx, "zuki")
+	err = quries.DeleteWritersWithName(ctx, "zuki")
 	if err != nil {
 		return err
 	}
 
-	_, err = quries.CreateAuthor(ctx, db.CreateAuthorParams{
+	_, err = quries.CreateWriters(ctx, db.CreateWritersParams{
 		Name: "zuki",
 		Bio: pgtype.Text{
 			String: "former techinal lead in DAT",
@@ -37,17 +37,17 @@ func run() error {
 		return nil
 	}
 
-	authors, err := quries.ListAuthors(ctx)
+	authors, err := quries.ListWriterss(ctx)
 	if err != nil {
 		return err
 	}
 
-	fmt.Println("Authors:")
+	fmt.Println("Writerss:")
 	for _, author := range authors {
 		fmt.Println(author)
 	}
 
-	count, err := quries.CountAuthors(ctx)
+	count, err := quries.CountWriterss(ctx)
 	if err != nil {
 		return err
 	}
@@ -61,9 +61,9 @@ func run() error {
 
 	quriesTx := quries.WithTx(tx)
 
-	quriesTx.DeleteAuthorWithName(ctx, "wai")
+	quriesTx.DeleteWritersWithName(ctx, "wai")
 
-	quriesTx.CreateAuthor(ctx, db.CreateAuthorParams{
+	quriesTx.CreateWriters(ctx, db.CreateWritersParams{
 		Name: "wai",
 	})
 

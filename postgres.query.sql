@@ -1,32 +1,32 @@
--- name: GetAuthor :one
-SELECT * FROM authors
+-- name: GetWriters :one
+SELECT * FROM writers
 WHERE id = $1 LIMIT 1;
 
--- name: ListAuthors :many
-SELECT * FROM authors
+-- name: ListWriterss :many
+SELECT * FROM writers
 ORDER BY name;
 
--- name: CreateAuthor :one
-INSERT INTO authors (
+-- name: CreateWriters :one
+INSERT INTO writers (
   name, bio
 ) VALUES (
   $1, $2
 )
 RETURNING *;
 
--- name: UpdateAuthor :exec
-UPDATE authors
+-- name: UpdateWriters :exec
+UPDATE writers
   set name = $2,
   bio = $3
 WHERE id = $1;
 
--- name: DeleteAuthor :exec
-DELETE FROM authors
+-- name: DeleteWriters :exec
+DELETE FROM writers
 WHERE id = $1;
 
--- name: DeleteAuthorWithName :exec
-DELETE FROM authors
+-- name: DeleteWritersWithName :exec
+DELETE FROM writers
 WHERE name = $1;
 
--- name: CountAuthors :one
-SELECT count(*) FROM authors;
+-- name: CountWriterss :one
+SELECT count(*) FROM writers;
