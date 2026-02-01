@@ -53,7 +53,21 @@ func run() error {
 	}
 	fmt.Println("authors count", count)
 
-	return nil
+	tx, err := conn.Begin(ctx)
+	if err != nil {
+		return err
+	}
+	defer tx.Rollback(ctx)
+
+	quriesTx := quries.WithTx(tx)
+
+	quriesTx.DeleteAuthorWithName(ctx, "wai")
+
+	quriesTx.CreateAuthor(ctx, db.CreateAuthorParams{
+		Name: "wai",
+	})
+
+	return tx.Commit(ctx)
 }
 
 func main() {
