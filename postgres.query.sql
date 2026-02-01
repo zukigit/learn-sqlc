@@ -30,3 +30,21 @@ WHERE name = $1;
 
 -- name: CountWriterss :one
 SELECT count(*) FROM writers;
+
+-- name: CreateBooks :one
+INSERT INTO books (
+  writer_id, name, bio
+) VALUES (
+  $1, $2, $3
+)
+RETURNING *;
+
+-- name: DeleteBooks :exec
+DELETE FROM books
+WHERE id = $1;
+
+-- name: WritersAndBooks :many
+SELECT sqlc.embed(writers), sqlc.embed(books)
+FROM books
+JOIN writers ON writers.id = books.writer_id
+WHERE books.id = $1;
